@@ -6,7 +6,6 @@
 </head>
 <body>
   <style>
-
     html {
       font-family: sans-serif;
       background: #ffc600;
@@ -17,7 +16,7 @@
       margin: 50px auto;
       background: white;
       border-radius: 5px;
-      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
     }
 
     .item {
@@ -44,10 +43,15 @@
       padding: 20px;
       transition: background 0.2s;
       flex: 1;
-      font-family:'helvetica neue';
+      font-family: 'helvetica neue';
       font-size: 20px;
       font-weight: 200;
       border-left: 1px solid #D1E2FF;
+    }
+
+    .details {
+      text-align: center;
+      font-size: 15px;
     }
   </style>
    <!--
@@ -96,6 +100,29 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type=checkbox]');
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+
+  let lastChecked;
+
+  function handleCheck(e) {
+    let inBetween = false;
+    
+    if (e.shiftKey && this.checked) {
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === lastChecked) {
+          inBetween = !inBetween;
+        }
+        
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+      });
+    }
+    
+    lastChecked = this;
+  }
 </script>
 </body>
 </html>
